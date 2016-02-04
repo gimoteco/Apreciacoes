@@ -1,12 +1,14 @@
-<h1>Todas os reconhecimentos</h1>
-<ul>
-  {% for reconhecimento in reconhecimentos %}
-    <li>
-      Em {{ reconhecimento.data|date:'d/m/Y' }},
-      <strong>{{ reconhecimento.reconhecido }}</strong> reconheceu
-      <strong>{{ reconhecimento.reconhecedor }}</strong> por
-      {{ reconhecimento.valor }} dizendo
-      <em>{{ reconhecimento.justificativa }}</em>
-    </li>
-  {% endfor %}
-</ul>
+{% extends 'pagina_base.html' %}
+
+{% block corpo %}
+  <h1>Todas os reconhecimentos</h1>
+  <ul>
+    {% for reconhecimento in reconhecimentos %}
+      <li>
+        {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
+      </li>
+      {% empty %}
+        <p>Nao existem reconhecimentos!</p>
+    {% endfor %}
+  </ul>
+{% endblock %}

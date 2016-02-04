@@ -1,4 +1,4 @@
-from seguranca.models import Colaborador
+from reconhecimentos.models import Colaborador
 
 class AutenticadorDeColaborador:
 

@@ -26,7 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'seguranca.Colaborador'
+AUTH_USER_MODEL = 'reconhecimentos.Colaborador'
 AUTHENTICATION_BACKENDS = ['apreciacoes.backends.AutenticadorDeColaborador']
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'seguranca',
     'reconhecimentos'
 ]
 

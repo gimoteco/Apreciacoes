@@ -1,0 +1,21 @@
+{% extends 'pagina_base.html' %}
+
+{% block corpo %}
+  <h1>{{ colaborador.nome }}</h1>
+
+  {% regroup colaborador.reconhecimentos by valor as reconhecimentos_agrupados %}
+
+  <ul>
+  {% for reconhecimento_agrupado in reconhecimentos_agrupados %}
+      <li>{{ reconhecimento_agrupado.grouper.nome }} ({{ reconhecimento_agrupado.list|length  }})
+      <ul>
+          {% for reconhecimento in reconhecimento_agrupado.list %}
+            <li>
+              {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
+            </li>
+          {% endfor %}
+      </ul>
+      </li>
+  {% endfor %}
+  </ul>
+{% endblock %}

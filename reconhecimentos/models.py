@@ -1,5 +1,28 @@
 from django.db import models
 from apreciacoes.base import ExcecaoDeDominio
+from django.contrib.auth.models import AbstractBaseUser
+
+class Colaborador(AbstractBaseUser):
+	cpf = models.CharField(max_length=11, unique=True)
+	nome = models.CharField(max_length=200)
+	data_de_nascimento = models.DateField()
+
+	USERNAME_FIELD = 'cpf'
+
+	def reconhecer(self, reconhecedor, valor, justificativa):
+		if reconhecedor == self:
+			raise ExcecaoDeDominio('O colaborador nao pode reconher a si próprio')
+
+		if not justificativa.strip():
+			raise ExcecaoDeDominio('A sua justificativa deve ser informada')
+
+		self.reconhecido.create(reconhecedor=reconhecedor, valor=valor, justificativa=justificativa)
+
+	def reconhecimentos(self):
+		return self.reconhecido.all()
+
+	def __str__(self):
+		return self.nome
 
 class Valor(models.Model):
 	nome = models.CharField(max_length=200)
@@ -8,8 +31,8 @@ class Valor(models.Model):
 		return self.nome
 
 class Reconhecimento(models.Model):
-	reconhecedor = models.ForeignKey('seguranca.Colaborador', related_name='reconhecedor')
-	reconhecido = models.ForeignKey('seguranca.Colaborador', related_name='reconhecido')
+	reconhecedor = models.ForeignKey(Colaborador, related_name='reconhecedor')
+	reconhecido = models.ForeignKey(Colaborador, related_name='reconhecido')
 	valor = models.ForeignKey(Valor)
 	justificativa = models.CharField(max_length=200)
 	data = models.DateField(auto_now_add=True)

@@ -1,0 +1,11 @@
+Em {{ reconhecimento.data|date:'d/m/Y' }},
+<a href="{% url 'perfil' reconhecimento.reconhecido.id %}">
+  {{ reconhecimento.reconhecido }}
+</a>
+foi reconhecidor pelo
+<a href="{% url 'perfil' reconhecimento.reconhecedor.id %}">
+  {{ reconhecimento.reconhecedor }}
+</a>
+por
+{{ reconhecimento.valor }} dizendo
+<em>{{ reconhecimento.justificativa }}</em>
