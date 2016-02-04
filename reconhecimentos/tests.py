@@ -1,20 +1,27 @@
 from django.test import TestCase
-from django.core.urlresolvers import reverse
-from seguranca.models import Colaborador
+from seguranca.factories import ColaboradorFactory
+from reconhecimentos.factories import ValorFactory
+from apreciacoes.base import ExcecaoDeDominio
 
-class TestesDeViews(TestCase):
+class TesteDeReconhecimento(TestCase):
 
-    def testa_autenticacao_correta(self):
-        dados_da_requisicao = {'cpf': '00000000000', 'data-de-nascimento': '1991-03-16' }
-        Colaborador.objects.create(cpf=dados_da_requisicao['cpf'], data_de_nascimento=dados_da_requisicao['data-de-nascimento'])
+    def setUp(self):
+        self.reconhecido = ColaboradorFactory()
+        self.reconhecedor = ColaboradorFactory()
+        self.valor = ValorFactory()
+        self.justificativa = "Foi legal aquilo que você fez!"
 
-        resposta = self.client.post(reverse('login'), dados_da_requisicao)
+    def testa_o_reconhecimento_de_uma_habilidade(self):
+        self.reconhecido.reconhecer(self.reconhecedor, self.valor, self.justificativa);
 
-        self.assertEqual(302, resposta.status_code)
+        reconhecimento = self.reconhecido.reconhecimentos()[0]
+        self.assertEqual(1, len(self.reconhecido.reconhecimentos_por_valor(self.valor)))
+        self.assertEqual(self.reconhecedor, reconhecimento.reconhecedor)
+        self.assertEqual(self.valor, reconhecimento.valor)
+        self.assertEqual(self.justificativa, reconhecimento.justificativa)
 
-    def testa_autenticacao_incorreta(self):
-        dados_da_requisicao = {'cpf': '66666666666', 'data-de-nascimento': '1991-03-16' }
+    def testa_que_o_colaborador_nao_pode_se_reconher(self):
+        parametros = (self.reconhecido, self.valor, 'Parabéns pela iniciativa')
+        mensagem_esperada = 'O colaborador nao pode reconher a si próprio'
 
-        resposta = self.client.post(reverse('login'), dados_da_requisicao)
-
-        self.assertEqual(401, resposta.status_code)
+        self.assertRaisesMessage(ExcecaoDeDominio, mensagem_esperada, self.reconhecido.reconhecer, *parametros)

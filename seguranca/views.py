@@ -20,6 +20,3 @@ def login(requisicao):
             return HttpResponse('Acesso não autorizado', status=401)
 
     return render(requisicao, 'login.html')
-
-def pagina_inicial(requisicao):
-    return render(requisicao, 'pagina_inicial.html', {'usuario': requisicao.user })

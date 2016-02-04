@@ -7,15 +7,8 @@ class Colaborador(AbstractBaseUser):
 	cpf = models.CharField(max_length=11, unique=True)
 	nome = models.CharField(max_length=200)
 	data_de_nascimento = models.DateField()
-	foto = models.TextField(default=None, null=True)
 
 	USERNAME_FIELD = 'cpf'
-
-	def alterar_foto(self, nova_foto_em_base64):
-		if not nova_foto_em_base64.strip():
-			raise ExcecaoDeDominio('Foto deve ser informada')
-
-		self.foto = nova_foto_em_base64
 
 	def reconhecer(self, reconhecedor, valor, justificativa):
 		if reconhecedor == self:
@@ -31,3 +24,6 @@ class Colaborador(AbstractBaseUser):
 
 	def reconhecimentos_por_valor(self, valor):
 		return self.reconhecido.filter(valor=valor)
+
+	def __str__(self):
+		return self.nome

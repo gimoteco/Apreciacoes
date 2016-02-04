@@ -1,24 +1,16 @@
 {% extends "template_base.html" %}
 
 {% block corpo %}
-  <div class="row">
-    <form class="col s12" method="POST">
-      {% csrf_token %}
-      <div class="row">
-        <div class="input-field col s4">
-          <input name="cpf" id="cpf" type="text" class="validate">
-          <label for="cpf">CPF</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s4">
-          <input name="data-de-nascimento" id="data-de-nascimento" type="text" class="validate">
-          <label for="data-de-nascimento">Data de nascimento</label>
-        </div>
-      </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
-        <i class="material-icons right">trending_flat</i>
-      </button>
-    </form>
-  </div>
+  <form method="POST">
+    {% csrf_token %}
+    <div>
+        <input name="cpf" id="cpf" type="text" class="validate">
+        <label for="cpf">CPF</label>
+    </div>
+    <div>
+        <input name="data-de-nascimento" id="data-de-nascimento" type="text" class="validate">
+        <label for="data-de-nascimento">Data de nascimento</label>
+    </div>
+    <button>Entrar</button>
+  </form>
 {% endblock %}
