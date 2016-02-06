@@ -4,7 +4,9 @@
   <h1>{{ colaborador.nome }}</h1>
 
   {% regroup colaborador.reconhecimentos by valor as reconhecimentos_agrupados %}
+  {% regroup colaborador.reconhecimentos by reconhecedor as reconhecedores_agrupados %}
 
+  <h2>Reconhecimentos</h2>
   <ul>
   {% for reconhecimento_agrupado in reconhecimentos_agrupados %}
       <li>{{ reconhecimento_agrupado.grouper.nome }} ({{ reconhecimento_agrupado.list|length  }})
@@ -18,4 +20,14 @@
       </li>
   {% endfor %}
   </ul>
+  <h2>Reconhecedores</h2>
+
+  <ul>
+  {% for reconhecedor_agrupado in reconhecedores_agrupados %}
+      <li>
+        {{ reconhecedor_agrupado.grouper.nome }} ({{ reconhecedor_agrupado.list|length  }})
+      </li>
+  {% endfor %}
+  </ul>
+
 {% endblock %}

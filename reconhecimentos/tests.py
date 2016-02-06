@@ -6,6 +6,10 @@ from django.core.urlresolvers import reverse
 
 class TestesDeViews(TestCase):
 
+    def logar(self, colaborador):
+        dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.date() }
+        resposta = self.client.post(reverse('login'), dados_da_requisicao)
+
     def testa_autenticacao_correta(self):
         colaborador = ColaboradorFactory()
         dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.date() }
@@ -21,6 +25,20 @@ class TestesDeViews(TestCase):
 
         self.assertEqual(401, resposta.status_code)
 
+    def testa_o_reconhecimento(self):
+        reconhecido = ColaboradorFactory()
+        reconhecedor = ColaboradorFactory()
+        self.logar(reconhecedor)
+        valor = ValorFactory()
+        justificativa = 'voce é muito bom'
+        dados_da_requisicao = {'valor': valor.id, 'reconhecido': reconhecido.id, 'justificativa': justificativa}
+
+        resposta = self.client.post(reverse('reconhecer'), dados_da_requisicao)
+
+        reconhecimento = reconhecido.reconhecido.all().first()
+        self.assertEqual(justificativa, reconhecimento.justificativa)
+        self.assertEqual(valor, reconhecimento.valor)
+        self.assertEqual(reconhecedor, reconhecimento.reconhecedor)
 
 class TesteDeReconhecimento(TestCase):
 

@@ -1,0 +1,19 @@
+{% extends 'pagina_base.html' %}
+
+{% block corpo %}
+<form method="POST">
+	{% csrf_token %}
+	<select name="valor">
+	{% for valor in valores %}
+		<option value="{{ valor.id }}">{{ valor.nome }}</option>
+	{% endfor %}
+	</select>
+	<select name="reconhecido">
+	{% for colaborador in colaboradores %}
+		<option value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+	{% endfor %}
+	</select>
+	<textarea name="justificativa" cols="30" rows="10"></textarea>
+	<button>Reconhecer</button>
+</form>
+{% endblock %}
