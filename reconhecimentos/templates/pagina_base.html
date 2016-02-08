@@ -6,8 +6,9 @@
   <body>
     <nav>
       <a href="{% url 'pagina_inicial' %}">Todos os reconhecimentos</a>
-      <a href="{% url 'reconhecer' %}">Reconhecer alguém</a>
+      <a href="{% url 'reconhecer' %}">Reconhecer</a>
     </nav>
+    {% include 'menu_do_usuario.html' %}
     {% block corpo %}
     {% endblock %}
   </body>

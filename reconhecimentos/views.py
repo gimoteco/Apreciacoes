@@ -6,6 +6,7 @@ from reconhecimentos.models import Valor
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from apreciacoes.base import acesso_anonimo
 
 def pagina_inicial(requisicao):
@@ -24,13 +25,17 @@ def reconhecer(requisicao):
         reconhecedor = requisicao.user
 
         reconhecido.reconhecer(reconhecedor, valor, justificativa)
-        
+
         return redirect(perfil, reconhecido.id)
 
     valores = Valor.objects.all()
     colaboradores = Colaborador.objects.all()
     dados = dict(colaboradores=colaboradores, valores=valores)
     return render(requisicao, 'reconhecer.html', dados)
+
+def logout(requisicao):
+    auth_logout(requisicao)
+    return redirect('login')
 
 @acesso_anonimo
 def login(requisicao):

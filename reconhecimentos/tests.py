@@ -10,6 +10,16 @@ class TestesDeViews(TestCase):
         dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.date() }
         resposta = self.client.post(reverse('login'), dados_da_requisicao)
 
+    def testa_logout(self):
+        colaborador = ColaboradorFactory()
+        self.logar(colaborador)
+
+        resposta = self.client.get(reverse('logout'))
+        self.assertRedirects(resposta, reverse('login'))
+
+        resposta = self.client.post(reverse('reconhecer'))
+        self.assertEqual(401, resposta.status_code)
+
     def testa_autenticacao_correta(self):
         colaborador = ColaboradorFactory()
         dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.date() }
