@@ -1,0 +1,10 @@
+/*******************************
+         Site Overrides
+*******************************/
+body > .grid {
+      height: 100%;
+}
+
+body {
+  background-image: url("@{imagePath}/background.jpg");
+}
