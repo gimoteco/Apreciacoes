@@ -1,11 +1,23 @@
-Em {{ reconhecimento.data|date:'d/m/Y' }},
-<a href="{% url 'perfil' reconhecimento.reconhecido.id %}">
-  {{ reconhecimento.reconhecido }}
-</a>
-foi reconhecido pelo
-<a href="{% url 'perfil' reconhecimento.reconhecedor.id %}">
-  {{ reconhecimento.reconhecedor }}
-</a>
-por
-{{ reconhecimento.valor }} dizendo
-<em>{{ reconhecimento.justificativa }}</em>
+<div class="event">
+    <div class="label">
+      <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a href="{% url 'perfil' reconhecimento.reconhecedor.id %}">
+          {{ reconhecimento.reconhecedor }}
+        </a> apreciou <a href="{% url 'perfil' reconhecimento.reconhecido.id %}">
+          {{ reconhecimento.reconhecido }}
+        </a>
+        <div class="date">
+          {{ reconhecimento.data|date:'d/m/Y' }}
+        </div>
+      </div>
+      <div class="extra text">
+        {{ reconhecimento.justificativa }}
+      </div>
+      <div class="meta">
+        <a class="ui teal tag label">{{ reconhecimento.valor }}</a>
+      </div>
+    </div>
+  </div>

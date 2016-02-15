@@ -4,16 +4,25 @@
 <html>
   <head>
       <title>Aprecie.me</title>
-      <link rel="stylesheet" href="{% static 'semantic/dist/semantic.min.css' %}">
-      <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'dist/semantic.min.css' %}">
+      <script src="{% static 'dist/semantic.min.js' %}"></script>
   </head>
   <body>
-    <nav>
-      <a href="{% url 'pagina_inicial' %}">Todos os reconhecimentos</a>
-      <a href="{% url 'reconhecer' %}">Reconhecer</a>
+    <nav class="ui menu">
+      <a class="item" href="{% url 'pagina_inicial' %}">Todos os reconhecimentos</a>
+      <a class="item" href="{% url 'reconhecer' %}">Reconhecer</a>
+      {% include 'menu_do_usuario.html' %}
     </nav>
-    {% include 'menu_do_usuario.html' %}
-    {% block corpo %}
-    {% endblock %}
-  </body>
+    <div class="ui container">
+
+      <div class="ui segments">
+
+        <div class="ui segment">
+          {% block corpo %}
+          {% endblock %}
+        </div>
+      </div>
+    </body>
+    </div>
+
 </html>

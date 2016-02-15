@@ -20,13 +20,9 @@
   <ul>
   {% for reconhecimento_agrupado in reconhecimentos_agrupados %}
       <li>{{ reconhecimento_agrupado.grouper.nome }} ({{ reconhecimento_agrupado.list|length  }})
-      <ul>
           {% for reconhecimento in reconhecimento_agrupado.list %}
-            <li>
               {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
-            </li>
           {% endfor %}
-      </ul>
       </li>
   {% endfor %}
   </ul>

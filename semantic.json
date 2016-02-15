@@ -1,0 +1,21 @@
+{
+  "base": "tema",
+  "paths": {
+    "source": {
+      "config": "src/theme.config",
+      "definitions": "src/definitions/",
+      "site": "src/site/",
+      "themes": "src/themes/"
+    },
+    "output": {
+      "packaged": "../reconhecimentos/static/dist/",
+      "uncompressed": "../reconhecimentos/static/dist/components/",
+      "compressed": "../reconhecimentos/static/dist/components/",
+      "themes": "../reconhecimentos/static/dist/themes/"
+    },
+    "clean": "../reconhecimentos/static/dist/"
+  },
+  "permission": false,
+  "rtl": false,
+  "version": "2.1.8"
+}

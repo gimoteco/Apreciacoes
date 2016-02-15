@@ -1,5 +1,7 @@
 {% if user.is_authenticated %}
-  <a href="{% url 'perfil' user.id %}">
-    {{ user.nome }}</a>
-  <a href="{% url 'logout' %}">Sair</a>
+  <div class="right menu">
+    <a class="item" href="{% url 'perfil' user.id %}">
+      {{ user.nome }}</a>
+    <a class="item" href="{% url 'logout' %}">Sair</a>
+  </div>
 {% endif %}

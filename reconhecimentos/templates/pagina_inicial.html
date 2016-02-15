@@ -2,13 +2,11 @@
 
 {% block corpo %}
   <h1>Todas os reconhecimentos</h1>
-  <ul>
+  <div class="ui feed">
     {% for reconhecimento in reconhecimentos %}
-      <li>
-        {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
-      </li>
+      {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
       {% empty %}
         <p>Nao existem reconhecimentos!</p>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
