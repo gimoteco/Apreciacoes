@@ -1,23 +1,21 @@
-<div class="event">
-    <div class="label">
-      <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-    </div>
-    <div class="content">
-      <div class="summary">
-        <a href="{% url 'perfil' reconhecimento.reconhecedor.id %}">
-          {{ reconhecimento.reconhecedor }}
-        </a> apreciou <a href="{% url 'perfil' reconhecimento.reconhecido.id %}">
-          {{ reconhecimento.reconhecido }}
-        </a>
-        <div class="date">
-          {{ reconhecimento.data|date:'d/m/Y' }}
-        </div>
-      </div>
-      <div class="extra text">
-        {{ reconhecimento.justificativa }}
-      </div>
-      <div class="meta">
-        <a class="ui teal tag label">{{ reconhecimento.valor }}</a>
+{% load humanize %}
+
+<p>
+  <h1 class="ui huge center aligned icon header">
+    <i class="circular users icon"></i>
+    <em>"{{ reconhecimento.justificativa }}"</em>
+    <div class="sub header">
+      <a href="{% url 'perfil' reconhecimento.reconhecido.id %}">
+        {{ reconhecimento.reconhecido }}
+      </a> foi apreciado por
+      <a href="{% url 'perfil' reconhecimento.reconhecedor.id %}">
+        {{ reconhecimento.reconhecedor }}
+      </a>,
+      por <strong>{{ reconhecimento.valor|title }}</strong>
+      <div class="date">
+        {{ reconhecimento.data|naturalday:'d-M-y' }}
       </div>
     </div>
-  </div>
+  </h1>
+
+</p>

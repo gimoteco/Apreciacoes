@@ -1,12 +1,17 @@
 {% extends 'pagina_base.html' %}
 
 {% block corpo %}
-  <h1 class="ui header center aligned">{{ colaborador.nome }}</h1>
+
+  <h1 class="ui center aligned header">
+    <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg" alt="" class="">
+    {{ colaborador.nome }}
+  </h1>
+
+  <hr class="ui divider">
 
   {% regroup colaborador.reconhecimentos by valor as reconhecimentos_agrupados %}
   {% regroup colaborador.reconhecimentos by reconhecedor as reconhecedores_agrupados %}
 
-  <h2 class="ui header center aligned">Reconhecimentos</h2>
   <div class="ui two statistics">
     <div class="ui statistic">
       <div class="value">{{ colaborador.reconhecimentos|length }}</div>
@@ -17,23 +22,29 @@
       <div class="label">Reconhecedores</div>
     </div>
   </div>
-  <ul>
+
+  <hr class="ui divider">
+
   {% for reconhecimento_agrupado in reconhecimentos_agrupados %}
-      <li>{{ reconhecimento_agrupado.grouper.nome }} ({{ reconhecimento_agrupado.list|length  }})
-          {% for reconhecimento in reconhecimento_agrupado.list %}
-              {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
-          {% endfor %}
-      </li>
+      <h1 class="ui center aligned header">
+        {{ reconhecimento_agrupado.grouper.nome|title }}
+        <div class="ui red circular label">
+          {{ reconhecimento_agrupado.list|length  }}
+        </div>
+      </h1>
+      {% for reconhecimento in reconhecimento_agrupado.list %}
+          {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
+      {% endfor %}
   {% endfor %}
-  </ul>
-  <h2>Reconhecedores</h2>
-  <ul>
+
+  <hr class="ui divider">
+
+  <h1 class="ui header center aligned">Reconhecedores</h1>
+
   {% for reconhecedor_agrupado in reconhecedores_agrupados %}
-      <li>
-
+    <a class="ui basic image label">
+      <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
         {{ reconhecedor_agrupado.grouper.nome }} ({{ reconhecedor_agrupado.list|length  }})
-      </li>
+    </a>
   {% endfor %}
-  </ul>
-
 {% endblock %}

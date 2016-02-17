@@ -1,9 +1,12 @@
 {% extends 'pagina_base.html' %}
 
 {% block corpo %}
-  <h1>Todas os reconhecimentos</h1>
-  <div class="ui feed">
-    {% for reconhecimento in reconhecimentos %}
+  <h2 class="ui center aligned icon header">
+    <i class="circular inverted trophy icon"></i>
+    Últimos Reconhecimentos
+  </h2>
+  <div class="ui segments">
+    {% for reconhecimento in reconhecimentos|dictsortreversed:'data' %}
       {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
       {% empty %}
         <p>Nao existem reconhecimentos!</p>
