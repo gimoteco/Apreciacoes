@@ -1,11 +1,13 @@
 {% extends 'pagina_base.html' %}
 
 {% block corpo %}
-  <h2 class="ui center aligned icon header">
-    <i class="circular inverted trophy icon"></i>
+  <h1 class="ui center aligned icon header">
     Últimos Reconhecimentos
-  </h2>
-  <div class="ui segments">
+  </h1>
+
+  <hr class="ui divider">
+
+  <div class="ui grid">
     {% for reconhecimento in reconhecimentos|dictsortreversed:'data' %}
       {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
       {% empty %}
