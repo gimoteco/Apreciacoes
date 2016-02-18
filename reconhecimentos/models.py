@@ -10,9 +10,6 @@ class Colaborador(AbstractBaseUser):
 	USERNAME_FIELD = 'cpf'
 
 	def reconhecer(self, reconhecedor, valor, justificativa):
-		if reconhecedor == self:
-			raise ExcecaoDeDominio('O colaborador nao pode reconher a si próprio')
-
 		if not justificativa.strip():
 			raise ExcecaoDeDominio('A sua justificativa deve ser informada')
 

@@ -67,9 +67,3 @@ class TesteDeReconhecimento(TestCase):
         self.assertEqual(self.reconhecedor, reconhecimento.reconhecedor)
         self.assertEqual(self.valor, reconhecimento.valor)
         self.assertEqual(self.justificativa, reconhecimento.justificativa)
-
-    def testa_que_o_colaborador_nao_pode_se_reconher(self):
-        parametros = (self.reconhecido, self.valor, 'Parabéns pela iniciativa')
-        mensagem_esperada = 'O colaborador nao pode reconher a si próprio'
-
-        self.assertRaisesMessage(ExcecaoDeDominio, mensagem_esperada, self.reconhecido.reconhecer, *parametros)
