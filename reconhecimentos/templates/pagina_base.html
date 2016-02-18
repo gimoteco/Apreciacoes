@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <title>Aprecie.me</title>
+      <title>Apreciacoes</title>
       <link rel="stylesheet" href="{% static 'dist/semantic.min.css' %}">
       <script src="{% static 'dist/semantic.min.js' %}"></script>
   </head>
   <body>
-    
-    <div class="ui fixed inverted menu">
+
+    <div class="ui fixed inverted compact menu">
       <div class="ui container">
         <a href="{% url 'pagina_inicial' %}" class="header icon item">
           <i class="trophy icon"></i>
@@ -20,17 +20,13 @@
       </div>
     </div>
 
-    <div class="ui container">
+    <div class="ui main container">
       <div class="ui segments">
-        <div class="ui segment">
+        <div class="ui piled segment">
           {% block corpo %}
           {% endblock %}
         </div>
       </div>
-    </div>
-
-    <div class="ui  footer inverted vertical segment">
-      <h3 class="ui center aligned header">Gimotech</h3>
     </div>
   </body>
 </html>

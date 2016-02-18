@@ -1,6 +1,7 @@
 {% if user.is_authenticated %}
-  <div class="right menu">
+  <div class="right compact menu">
     <a class="item" href="{% url 'perfil' user.id %}">
+      <i class="user icon"></i>
       {{ user.nome }}</a>
     <a class="item" href="{% url 'logout' %}">Sair</a>
   </div>

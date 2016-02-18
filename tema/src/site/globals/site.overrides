@@ -1,10 +1,15 @@
 /*******************************
          Site Overrides
 *******************************/
-body > .grid {
-      height: 100%;
-}
-
 body {
   background-image: url("@{imagePath}/background.jpg");
+
+  .grid {
+       height: 100%;
+   }
+}
+
+.main.container {
+  margin-top: 5em;
+  margin-bottom: 5em;
 }
