@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 class TestesDeViews(TestCase):
 
     def logar(self, colaborador):
-        dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.date() }
+        dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.strftime('%d/%m/%Y') }
         resposta = self.client.post(reverse('login'), dados_da_requisicao)
 
     def testa_logout(self):
@@ -22,14 +22,14 @@ class TestesDeViews(TestCase):
 
     def testa_autenticacao_correta(self):
         colaborador = ColaboradorFactory()
-        dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.date() }
+        dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.strftime('%d/%m/%Y') }
 
         resposta = self.client.post(reverse('login'), dados_da_requisicao)
 
         self.assertRedirects(resposta, reverse('pagina_inicial'))
 
     def testa_autenticacao_incorreta(self):
-        dados_da_requisicao = {'cpf': '66666666666', 'data-de-nascimento': '1991-03-16' }
+        dados_da_requisicao = {'cpf': '66666666666', 'data-de-nascimento': '16/03/1991' }
 
         resposta = self.client.post(reverse('login'), dados_da_requisicao)
 
