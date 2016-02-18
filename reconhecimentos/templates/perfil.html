@@ -7,6 +7,10 @@
     {{ colaborador.nome }}
   </h1>
 
+  <h2 class="ui center aligned header">
+    <button class="ui primary button">Apreciar</button>
+  </h2>
+
   <hr class="ui divider">
 
   {% regroup colaborador.reconhecimentos by valor as reconhecimentos_agrupados %}
@@ -28,7 +32,7 @@
   {% for reconhecimento_agrupado in reconhecimentos_agrupados %}
       <h1 class="ui center aligned header">
         {{ reconhecimento_agrupado.grouper.nome|title }}
-        <div class="ui red circular label">
+        <div class="ui teal circular label">
           {{ reconhecimento_agrupado.list|length  }}
         </div>
       </h1>
@@ -44,8 +48,9 @@
   <div class="ui labels">
     {% for reconhecedor_agrupado in reconhecedores_agrupados %}
       <a class="ui basic image label">
-        <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
-          {{ reconhecedor_agrupado.grouper.nome }} ({{ reconhecedor_agrupado.list|length  }})
+        <div class="floating ui circular teal label">{{ reconhecedor_agrupado.list|length  }}</div>
+        <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg" />
+        {{ reconhecedor_agrupado.grouper.nome }}
       </a>
     {% endfor %}
   </div>

@@ -1,19 +1,40 @@
 {% extends 'pagina_base.html' %}
 
 {% block corpo %}
-<form method="POST">
+
+<form class="ui form" method="POST">
 	{% csrf_token %}
-	<select name="valor">
-	{% for valor in valores %}
-		<option value="{{ valor.id }}">{{ valor.nome }}</option>
-	{% endfor %}
-	</select>
-	<select name="reconhecido">
-	{% for colaborador in colaboradores %}
-		<option value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
-	{% endfor %}
-	</select>
-	<textarea name="justificativa" cols="30" rows="10"></textarea>
-	<button>Reconhecer</button>
+	<div class="field">
+		<label>Eu aprecio o(a)</label>
+		<select class="ui dropdown" name="reconhecido" required>
+			<option value="">Nome da pessoa</option>
+			{% for colaborador in colaboradores %}
+			<option value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div class="field">
+		<label>por seu ato de</label>
+		<select name="valor" class="ui dropdown" required>
+			<option value="">um valor</option>
+			{% for valor in valores %}
+			<option value="{{ valor.id }}">{{ valor.nome }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div class="field">
+		<label>porquê</label>
+		<input name="justificativa" placeholder="uma explicação detalhada porquê essa apreciação é merecida" type="text" required/>
+	</div>
+	<button class="ui  primary center aligned icon button">
+		<i class="trophy icon"></i>
+		 Reconhecer
+	 </button>
 </form>
+
+<script>
+	$(document).ready(function() {
+		$('.ui.dropdown').dropdown();
+	});
+</script>
 {% endblock %}
