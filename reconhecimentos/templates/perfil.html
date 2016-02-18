@@ -41,10 +41,14 @@
 
   <h1 class="ui header center aligned">Reconhecedores</h1>
 
-  {% for reconhecedor_agrupado in reconhecedores_agrupados %}
-    <a class="ui basic image label">
-      <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
-        {{ reconhecedor_agrupado.grouper.nome }} ({{ reconhecedor_agrupado.list|length  }})
-    </a>
-  {% endfor %}
-{% endblock %}
+  <div class="ui labels">
+    {% for reconhecedor_agrupado in reconhecedores_agrupados %}
+      <a class="ui basic image label">
+        <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
+          {{ reconhecedor_agrupado.grouper.nome }} ({{ reconhecedor_agrupado.list|length  }})
+      </a>
+    {% endfor %}
+  </div>
+
+
+  {% endblock %}

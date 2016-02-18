@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Aprecie.me</title>
+  <title>Apreciações</title>
   <link rel="stylesheet" href="{% static 'dist/semantic.min.css' %}">
-  <script src="{% static 'dist/semantic.min.js' %}"></script>
 </head>
 <body>
   <div class="ui middle aligned center aligned grid">
@@ -15,14 +14,17 @@
           {% csrf_token %}
           <div class="field">
             <div class="ui left icon input">
-              <input name="cpf" id="cpf" placeholder="Qual seu CPF?" type="text" class="validate">
+              <input name="cpf" id="cpf" placeholder="Qual seu CPF?" type="text"
+                data-mask="000.000.000-00" class="validate" required>
               <i class="user icon"></i>
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
-              <input name="data-de-nascimento" id="data-de-nascimento" placeholder="Quando você nasceu?" type="text" class="validate">
-              <i class="calendar icon"></i>
+              <input name="data-de-nascimento" id="data-de-nascimento"
+                data-mask="00/00/0000" required
+                placeholder="Quando você nasceu?" type="text" class="validate">
+              <i class="calendar icon"></i>'
             </div>
           </div>
           <button class="ui fluid primary large button">Entrar</button>
@@ -30,5 +32,9 @@
       </div>
     </div>
   </div>
+
+  <script src="{% static 'jquery.min.js' %}"></script>
+  <script src="{% static 'jquery.mask.min.js' %}"></script>
+  <script src="{% static 'dist/semantic.min.js' %}"></script>
 </body>
 </html>

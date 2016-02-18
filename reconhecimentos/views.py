@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from django.shortcuts import redirect
 from reconhecimentos.models import Reconhecimento
@@ -40,9 +41,8 @@ def logout(requisicao):
 @acesso_anonimo
 def login(requisicao):
     if requisicao.method == "POST":
-
-        cpf = requisicao.POST['cpf']
-        data_de_nascimento = requisicao.POST['data-de-nascimento']
+        cpf = requisicao.POST['cpf'].replace('.', '').replace('-', '')
+        data_de_nascimento = datetime.strptime(requisicao.POST['data-de-nascimento'], '%d/%m/%Y')
         usuario_autenticado = authenticate(cpf=cpf, data_de_nascimento=data_de_nascimento)
 
         if usuario_autenticado:
