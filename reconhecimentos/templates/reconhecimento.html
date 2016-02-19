@@ -1,5 +1,44 @@
 {% load humanize %}
+<div class="row">
+    <div class="middle aligned two wide column">
+      <img class="ui circular tiny image" src="http://semantic-ui.com/images/avatar2/large/kristy.png" alt="" />
+    </div>
+    <div class="one middle aligned wide column">
+      <i class="big right arrow icon"></i>
+    </div>
+    <div class="middle aligned two wide column">
+      <img class="ui circular small image" src="http://semantic-ui.com/images/avatar2/large/molly.png" alt="" />
+    </div>
+</div>
 
+<div class="row">
+  <div class="ten wide center aligned column">
+    <h3 class="ui center aligned huge header">
+      <em>
+        "{{ reconhecimento.justificativa }}"
+    </em>
+    </h3>
+    <p>
+      <strong>
+        <a href="{% url 'perfil' reconhecimento.reconhecedor.id %}">
+          {{ reconhecimento.reconhecedor }}
+        </a>
+      </strong>
+      apreciou
+      <strong>
+        <a href="{% url 'perfil' reconhecimento.reconhecido.id %}">
+        {{ reconhecimento.reconhecido }}
+        </a>
+      </strong>
+      por
+      <strong>{{ reconhecimento.valor|title }}</strong>
+    </p>
+    <p>
+      {{ reconhecimento.data|naturalday:'d \d\e F \d\e Y' }}
+    </p>
+  </div>
+</div>
+<!--
 <div class="row">
   <div class="five wide column">
     <img class="ui circular left floated tiny image" src="http://semantic-ui.com/images/avatar2/large/kristy.png" alt="" />
@@ -22,7 +61,7 @@
       </div>
     </h1>
   </div>
-</div>
+</div> -->
 <!--
 <p>
   <h1 class="ui huge center aligned small icon header">
