@@ -27,8 +27,9 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'reconhecimentos.Colaborador'
 SOCIAL_AUTH_USER_MODEL = 'reconhecimentos.Colaborador'
+
 AUTHENTICATION_BACKENDS = (
-    'apreciacoes.backends.AutenticadorDeColaborador',
+    'django.contrib.auth.backends.ModelBackend',
     'social.backends.facebook.FacebookOAuth2'
 )
 
@@ -36,6 +37,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = '181079105595589'
 SOCIAL_AUTH_FACEBOOK_SECRET = '3d8cb585b60c95c180db5c061164daec'
 
 LOGIN_URL = '/login'
+EXEMPT_URLS = [LOGIN_URL, '/login/facebook', '/complete/facebook']
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,7 +61,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'apreciacoes.middlewares.LoginObrigatorioMiddleware'
+    'apreciacoes.middlewares.LoginObrigatorioMiddleware',
 ]
 
 ROOT_URLCONF = 'apreciacoes.urls'

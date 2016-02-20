@@ -41,9 +41,9 @@ def logout(requisicao):
 @acesso_anonimo
 def login(requisicao):
     if requisicao.method == "POST":
-        cpf = requisicao.POST['cpf'].replace('.', '').replace('-', '')
-        data_de_nascimento = datetime.strptime(requisicao.POST['data-de-nascimento'], '%d/%m/%Y')
-        usuario_autenticado = authenticate(cpf=cpf, data_de_nascimento=data_de_nascimento)
+        usuario = requisicao.POST['usuario']
+        senha = requisicao.POST['senha']
+        usuario_autenticado = authenticate(username=usuario, password=senha)
 
         if usuario_autenticado:
             auth_login(requisicao, usuario_autenticado)

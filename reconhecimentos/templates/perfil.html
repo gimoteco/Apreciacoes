@@ -4,7 +4,7 @@
 
   <h1 class="ui center aligned header">
     <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg" alt="" class="">
-    {{ colaborador.nome }}
+    {{ colaborador.username }}
   </h1>
 
   <h2 class="ui center aligned header">
@@ -36,9 +36,11 @@
           {{ reconhecimento_agrupado.list|length  }}
         </div>
       </h1>
-      {% for reconhecimento in reconhecimento_agrupado.list %}
-          {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
-      {% endfor %}
+      <div class="ui centered grid">
+        {% for reconhecimento in reconhecimento_agrupado.list %}
+            {% include 'reconhecimento.html' with reconhecimento=reconhecimento %}
+        {% endfor %}
+      </div>
   {% endfor %}
 
   <hr class="ui divider">
@@ -50,10 +52,9 @@
       <a class="ui basic image label">
         <div class="floating ui circular teal label">{{ reconhecedor_agrupado.list|length  }}</div>
         <img src="http://semantic-ui.com/images/avatar/small/elliot.jpg" />
-        {{ reconhecedor_agrupado.grouper.nome }}
+        {{ reconhecedor_agrupado.grouper.username }}
       </a>
     {% endfor %}
   </div>
-
 
   {% endblock %}

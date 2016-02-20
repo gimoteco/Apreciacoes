@@ -5,13 +5,13 @@ from apreciacoes.base import ExcecaoDeDominio
 from django.core.urlresolvers import reverse
 
 class TestesDeViews(TestCase):
+    senha = "minhaSenha"
 
     def logar(self, colaborador):
-        dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.strftime('%d/%m/%Y') }
-        resposta = self.client.post(reverse('login'), dados_da_requisicao)
+        self.client.login(username=colaborador.username, password=TestesDeViews.senha)
 
     def testa_logout(self):
-        colaborador = ColaboradorFactory()
+        colaborador = ColaboradorFactory(password=TestesDeViews.senha)
         self.logar(colaborador)
 
         resposta = self.client.get(reverse('logout'))
@@ -21,15 +21,15 @@ class TestesDeViews(TestCase):
         self.assertEqual(401, resposta.status_code)
 
     def testa_autenticacao_correta(self):
-        colaborador = ColaboradorFactory()
-        dados_da_requisicao = {'cpf': colaborador.cpf, 'data-de-nascimento': colaborador.data_de_nascimento.strftime('%d/%m/%Y') }
+        colaborador = ColaboradorFactory(password=TestesDeViews.senha)
+        dados_da_requisicao = {'usuario': colaborador.username, 'senha': TestesDeViews.senha }
 
         resposta = self.client.post(reverse('login'), dados_da_requisicao)
 
         self.assertRedirects(resposta, reverse('pagina_inicial'))
 
     def testa_autenticacao_incorreta(self):
-        dados_da_requisicao = {'cpf': '66666666666', 'data-de-nascimento': '16/03/1991' }
+        dados_da_requisicao = {'usuario': 'usuario-inexistente', 'senha': 'senha-errada' }
 
         resposta = self.client.post(reverse('login'), dados_da_requisicao)
 
@@ -37,7 +37,7 @@ class TestesDeViews(TestCase):
 
     def testa_o_reconhecimento(self):
         reconhecido = ColaboradorFactory()
-        reconhecedor = ColaboradorFactory()
+        reconhecedor = ColaboradorFactory(password=TestesDeViews.senha)
         self.logar(reconhecedor)
         valor = ValorFactory()
         justificativa = 'voce é muito bom'

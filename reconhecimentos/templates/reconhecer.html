@@ -9,7 +9,7 @@
 		<select class="ui dropdown" name="reconhecido" required>
 			<option value="">Nome da pessoa</option>
 			{% for colaborador in colaboradores %}
-			<option value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+			<option value="{{ colaborador.id }}">{{ colaborador.username }}</option>
 			{% endfor %}
 		</select>
 	</div>
