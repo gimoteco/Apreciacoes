@@ -27,7 +27,15 @@
               <i class="calendar icon"></i>'
             </div>
           </div>
-          <button class="ui fluid primary large button">Entrar</button>
+          <div class="field">
+            <button class="ui fluid primary large button">Entrar</button>
+          </div>
+          <div class="field">
+            <a href="{% url 'social:begin' 'facebook' %}?next={% url 'pagina_inicial' %}" class="ui fluid facebook large button">
+              <i class="facebook icon"></i>
+              Entrar com Facebook
+            </a>
+          </div>
         </form>
       </div>
     </div>

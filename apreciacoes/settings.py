@@ -26,11 +26,20 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'reconhecimentos.Colaborador'
-AUTHENTICATION_BACKENDS = ['apreciacoes.backends.AutenticadorDeColaborador']
+SOCIAL_AUTH_USER_MODEL = 'reconhecimentos.Colaborador'
+AUTHENTICATION_BACKENDS = (
+    'apreciacoes.backends.AutenticadorDeColaborador',
+    'social.backends.facebook.FacebookOAuth2'
+)
 
+SOCIAL_AUTH_FACEBOOK_KEY = '181079105595589'
+SOCIAL_AUTH_FACEBOOK_SECRET = '3d8cb585b60c95c180db5c061164daec'
+
+LOGIN_URL = '/login'
 # Application definition
 
 INSTALLED_APPS = [
+    'social.apps.django_app.default',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,7 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'apreciacoes.middlewares.LoginObrigatorioMiddleware'
+    #'apreciacoes.middlewares.LoginObrigatorioMiddleware'
 ]
 
 ROOT_URLCONF = 'apreciacoes.urls'
@@ -62,6 +71,8 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',

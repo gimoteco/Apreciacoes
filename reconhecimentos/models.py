@@ -1,14 +1,9 @@
 from django.db import models
 from apreciacoes.base import ExcecaoDeDominio
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, UserManager
+from django.contrib.auth.models import AbstractUser
 
-class Colaborador(AbstractBaseUser):
-	cpf = models.CharField(max_length=11, unique=True)
-	nome = models.CharField(max_length=200)
-	data_de_nascimento = models.DateField()
-
-	USERNAME_FIELD = 'cpf'
-
+class Colaborador(AbstractUser):
 	def reconhecer(self, reconhecedor, valor, justificativa):
 		if not justificativa.strip():
 			raise ExcecaoDeDominio('A sua justificativa deve ser informada')
@@ -19,7 +14,7 @@ class Colaborador(AbstractBaseUser):
 		return self.reconhecido.all()
 
 	def __str__(self):
-		return self.nome
+		return self.username
 
 class Valor(models.Model):
 	nome = models.CharField(max_length=200)
